@@ -1,5 +1,6 @@
 const express= require('express');
 const app= express();
+const port=process.env.PORT || 5000
 const nav=[
      {
           link:'/books',name:'Books'
@@ -41,7 +42,7 @@ app.get('/',function(req,res){
 });
 
 
-app.listen(5000);
+app.listen(port,()=>{console.log("Server ready at" + port)});
 
 // const { body, validationResult } = require('express-validator');
 
