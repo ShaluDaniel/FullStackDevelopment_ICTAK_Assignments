@@ -15,7 +15,10 @@ const nav=[
           link:'/login', name:'Login'
      },
      {
-          link:'/AddAuthor', name:'Add Author or Book'
+          link:'/AddAuthor', name:'Add  Book'
+     },
+     {
+          link:'/addAnAuthor', name:'Add Author '
      }
 ]
 const booksRouter=require('./src/routes/bookRoutes')(nav)
@@ -23,8 +26,9 @@ const loginRouter=require('./src/routes/loginRouter')(nav)
 const authorRouter=require('./src/routes/authorRoute')(nav)
 const SignUpRouter=require('./src/routes/SignUpRouter')(nav)
 const AddRouter=require('./src/routes/AddRouter')(nav)
+const AuthorRouter=require('./src/routes/AuthorRouter')(nav)
 
-
+app.use(express.urlencoded({extended:true}));
 app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 app.set('views','./src/views');
@@ -33,6 +37,9 @@ app.use('/login', loginRouter);
 app.use('/author', authorRouter);
 app.use('/Signup', SignUpRouter);
 app.use('/AddAuthor', AddRouter);
+app.use('/addAnAuthor', AuthorRouter);
+
+
 
 app.get('/',function(req,res){
      res.render("index",{

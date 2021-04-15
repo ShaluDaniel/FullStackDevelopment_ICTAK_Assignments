@@ -157,6 +157,11 @@ a,a:hover {
   padding:6px;
   color:#fff;
 }
+.headingAdd{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+text-align: center;
+font-size: xx-large
+}
 #loginhead{
   text-align: center;
   color: #111166;

@@ -1,41 +1,48 @@
 const express= require('express');
 const authorRouter = express.Router();
+const authorData=require('../model/authordata');
 function router(nav){
-    var authors =[
-        {
-             Name:'Joseph Barbera',
-             famous : 'Tom and Jerry',
-             Country:'United States',
-             img:"JBarbera.jpg"
-        },
+    // var authors =[
+    //     {
+    //          Name:'Joseph Barbera',
+    //          famous : 'Tom and Jerry',
+    //          Country:'United States',
+    //          img:"JBarbera.jpg"
+    //     },
     
-        {
-            Name:'Khalid Hoseni',
-            famous :'The Kite Runner',
-            Country:'Afghanistan',
-            img:"khalid.jpg"
-        },
-        {
-            Name:'Bram Stoker',
-            famous :'Dracula',
-            Country:'Britain',
-            img:"dracula.jpg"
-        }
-    ]
+    //     {
+    //         Name:'Khalid Hoseni',
+    //         famous :'The Kite Runner',
+    //         Country:'Afghanistan',
+    //         img:"khalid.jpg"
+    //     },
+    //     {
+    //         Name:'Bram Stoker',
+    //         famous :'Dracula',
+    //         Country:'Britain',
+    //         img:"dracula.jpg"
+    //     }
+    // ]
     authorRouter.get('/',function(req,res){
-        res.render('author',{
-             nav,
-             authors,
-             title:'author'
-        });
+        authorData.find().then(function(authors){
+            res.render('author',{
+                nav,
+                authors,
+                title:'author'
+           });
+        })
+        
     });
     authorRouter.get('/:id',function(req,res){
-        const id= req.params.id
+        
+        const id= req.params.id;
+        authorData.findOne({_id: id}).then(function(singleAuthor){
         res.render('singleAuthor',{
              nav,
              title:'id',
-             singleAuthor:authors[id]
+             singleAuthor
         });
+    })
     });
     return authorRouter;
 }
